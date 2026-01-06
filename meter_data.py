@@ -17,5 +17,6 @@ def validate_base_path(path):
 def get_csv_paths(base_path):
     """
     """
+    csv_paths = []
     
 
