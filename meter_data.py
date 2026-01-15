@@ -1,6 +1,5 @@
 import pandas as pd
 import os
-#import numpy as np
 
 def validate_base_path(path):
     """
@@ -117,20 +116,21 @@ def concat_meter_dfs(meter_dfs):
 
     return combined_df
         
-def process_kwh(df):
+def process_kwh(input_df):
     """
     Interpolate kwh readings to exact 15 minute intervals. Contains boolean 'interpolated'
     column to indicate if the row was interpolated or not, and boolean 'is_exact' column
     to indicate if row is at an exact 15 minute interval.
 
     Parameters:
-        df (dataframe): Dataframe containing meter data with kwh readings.
+        input_df (dataframe): Dataframe containing meter data with kwh readings.
     
     Returns:
         dataframe: Dataframe with interpolated kwh readings at exact 15 minute intervals.
     """
     # drop the 3_phase_watt_total column as its not needed for kwh interpolation
-    df.drop('3_phase_watt_total', axis=1, inplace=True)
+    if '3_phase_watt_total' in df.columns:
+        df = input_df.drop('3_phase_watt_total', axis=1, inplace=True)
 
     # convert datatetime column to a datetime type
     df['datetime'] = pd.to_datetime(df['datetime'], format='%Y-%m-%d %H:%M:%S')
@@ -148,7 +148,7 @@ def process_kwh(df):
     df['interpolated'] = False
     all_interpolated_rows = []
 
-    #process each meter separately
+    # process each meter separately
     for meter_name, meter_group in df.groupby('meter_name'):
         interpolated_rows = []
 
@@ -198,7 +198,7 @@ def process_kwh(df):
 
     # combine interpolated data with dataframe
     if all_interpolated_rows:
-        df = pd.concat([df, pd.DataFrame(interpolated_rows)], ignore_index=True)
+        df = pd.concat([df, pd.DataFrame(all_interpolated_rows)], ignore_index=True)
 
     df = df.drop(columns=['interval_15min', 'interval_offset'])
 
@@ -214,7 +214,12 @@ def duplicate_check(df):
     Parameters:
         df (dataframe): The dataframe to check for duplicates.
     """
-    print(df[df.duplicated(keep=False)])
+    duplicate_data = df[df.duplicated(keep=False)]
+    if duplicate_data.empty:
+        print("No duplicate rows found.")
+    else:
+        print("Duplicate rows found:")
+        print(duplicate_data)
 
 def meter_list(csv):
     """
@@ -224,4 +229,4 @@ def meter_list(csv):
         csv (str): Path to the CSV file.
     """
     df = pd.read_csv(csv, encoding='utf-8')
-    print(df['meter_name'].unique())
+    print('List of meter names: \n', df['meter_name'].unique())
