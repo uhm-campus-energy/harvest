@@ -30,9 +30,25 @@ def load_data(data_path, info_path):
     
     return df, info_df
 
+def filter_time_frame(df, start, end):
+    """
+    Filter meter data to only include rows within the specified datetime range.
+
+    Parameters:
+        df (dataframe): Meter data.
+        start (datetime): Start datetime.
+        end (datetime): End datetime.
+
+    Returns:
+        filtered_df (dataframe): Filtered meter data within the specified datetime range.
+    """
+    filtered_df = df[(df['datetime'] >= start) & (df['datetime'] <= end)].copy()
+    return filtered_df
+
+
 def process_kw_data(df, info_df):
     """
-    Process meter data to calculate average kw per 15-minute interval, adjusting for meter model.
+    Process meter data to calculate average kw per 15 minute interval, adjusting for meter model.
     PQM2 meters report in kw, while EPM7000 meters report in watts so will only divide EMP7000
     meters by 1000.
 
@@ -41,7 +57,7 @@ def process_kw_data(df, info_df):
         info_df (dataframe): Meter model info.
 
     Returns:
-        result_df (dataframe): Processed data with average kw per 15-minute interval.
+        result_df (dataframe): Processed data with average kw per 15 minute interval.
     """
     # create set of all meters of EPM7000 model
     model_check = set(info_df[info_df['meter_model'].str.contains('EPM7000')]['meter_name'])
@@ -129,7 +145,7 @@ def create_plots_pdf(merged_df, meters, filename):
             pdf.savefig()
             plt.close() 
 
-def get_comparison_info(merged_df, meters):
+def get_comparison_info(merged_df, meters, corr_threshold, pct_threshold):
     """
     Create a dataframe summarizing the comparison between Brian's and Aurora's kw data for each meter.
 
@@ -194,11 +210,11 @@ def get_comparison_info(merged_df, meters):
                 # average percent difference for meter
                 avg_pct_diff = valid_data['pct_diff'].mean()
 
-                # threshold for "close enough" (correlation > 0.95 or avg diff < 10%)
+                # threshold for "close enough" (ie: correlation > 0.95 or avg diff < 10%)
                 # r = 1.0 is perfect positive correlation, want diff % low as possible
-                if correlation > 0.95 and avg_pct_diff < 10:
+                if correlation > corr_threshold and avg_pct_diff < pct_threshold:
                     info_df.loc[meter, 'match'] = 'yes'
-                elif correlation > 0.95:
+                elif correlation > corr_threshold:
                     info_df.loc[meter, 'match'] = f'yes (high r={correlation:.2f}) but missing data'
                 else:
                     info_df.loc[meter, 'match'] = f'no (r={correlation:.2f}, avg_pct_diff={avg_pct_diff:.1f}%)'
