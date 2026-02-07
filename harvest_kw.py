@@ -79,27 +79,27 @@ def process_kw_data(df, info_df):
 
     return result_df
 
-def load_data_for_comparison(brian_csv, aurora_csv):
+def load_data_for_comparison(harvest_csv, aurora_csv):
     """
-    Load Brian's processed kw meter data from CSV and Aurora's from CSV for comparison.
+    Load harvest's processed kw meter data from CSV and Aurora's from CSV for comparison.
     
     Parameters:
-        brian_csv (str): Path to Brian's processed kw data CSV.
+        harvest_csv (str): Path to harvest's processed kw data CSV.
         aurora_csv (str): Path to Aurora's processed kw data CSV.
 
     Returns:
-        merged_df (dataframe): Merged dataframe containing both Brian's and Aurora's data.
+        merged_df (dataframe): Merged dataframe containing both harvest's and Aurora's data.
         meters (list): List of unique meter names in the merged dataframe.
     """
-    brian_df = pd.read_csv(brian_csv, encoding='utf-8')
+    harvest_df = pd.read_csv(harvest_csv, encoding='utf-8')
     aurora_df = pd.read_csv(aurora_csv, encoding='utf-8')
 
     # convert datetime column to datetime type
-    brian_df['datetime'] = pd.to_datetime(brian_df['datetime'])
+    harvest_df['datetime'] = pd.to_datetime(harvest_df['datetime'])
     aurora_df['datetime'] = pd.to_datetime(aurora_df['datetime'])
 
     # merge the dataframes together on meter_name and datetime
-    merged_df = pd.merge(brian_df, aurora_df, on=['meter_name', 'datetime'], how='outer')
+    merged_df = pd.merge(harvest_df, aurora_df, on=['meter_name', 'datetime'], how='outer')
     merged_df.columns = merged_df.columns.str.lower().str.replace(' ', '_')
 
     # if blue_pillar_kw column exists, rename it to mean for consistency with database
@@ -116,10 +116,10 @@ def load_data_for_comparison(brian_csv, aurora_csv):
 
 def create_plots_pdf(merged_df, meters, filename):
     """
-    Create a PDF file with plots comparing Brian's 'mean_kw' and Aurora's 'mean' data for each meter.
+    Create a PDF file with plots comparing harvest's 'mean_kw' and Aurora's 'mean' data for each meter.
 
     Parameters:
-        merged_df (dataframe): Merged dataframe containing both Brian's and Aurora's data.
+        merged_df (dataframe): Merged dataframe containing both harvest's and Aurora's data.
         meters (list): List of unique meter names.
         filename (str): Path to save the output PDF file.
     """
@@ -131,7 +131,7 @@ def create_plots_pdf(merged_df, meters, filename):
             meter_data = merged_df[merged_df['meter_name'] == meter].sort_values('datetime')
 
             plt.figure(figsize=(10, 6))
-            plt.plot(meter_data['datetime'], meter_data['mean_kw'], label="brians_kw", alpha=0.7) # alpha is opacity of the line
+            plt.plot(meter_data['datetime'], meter_data['mean_kw'], label="harvests_kw", alpha=0.7) # alpha is opacity of the line
             plt.plot(meter_data['datetime'], meter_data['mean'], label="auroras_kw", alpha=0.7)
             
             plt.xlabel('datetime')
@@ -147,10 +147,10 @@ def create_plots_pdf(merged_df, meters, filename):
 
 def get_comparison_info(merged_df, meters, corr_threshold, pct_threshold):
     """
-    Create a dataframe summarizing the comparison between Brian's and Aurora's kw data for each meter.
+    Create a dataframe summarizing the comparison between harvest's and Aurora's kw data for each meter.
 
     Parameters:
-        merged_df (dataframe): Merged dataframe containing both Brian's ('mean_kw') and Aurora's data ('mean').
+        merged_df (dataframe): Merged dataframe containing both harvest's ('mean_kw') and Aurora's data ('mean').
         meters (list): List of unique meter names.
     
     Returns:
@@ -161,7 +161,7 @@ def get_comparison_info(merged_df, meters, corr_threshold, pct_threshold):
     # create dataframe to hold information
     info_df = pd.DataFrame({
         'meter_name': meters,
-        'brians': '',
+        'harvests': '',
         'auroras': '', 
         'match': ''
     })
@@ -172,13 +172,13 @@ def get_comparison_info(merged_df, meters, corr_threshold, pct_threshold):
     for meter in meters:
         meter_data = merged_df[merged_df['meter_name'] == meter].sort_values('datetime')
         
-        # check validity of brian's kw data for meter
+        # check validity of harvest's kw data for meter
         if (meter_data['mean_kw'] == 0).all():
-            info_df.loc[meter, 'brians'] = 'zeros'
+            info_df.loc[meter, 'harvests'] = 'zeros'
         elif meter_data['mean_kw'].isna().all():
-            info_df.loc[meter, 'brians'] = 'missing'
+            info_df.loc[meter, 'harvests'] = 'missing'
         else:
-            info_df.loc[meter, 'brians'] = 'ok'
+            info_df.loc[meter, 'harvests'] = 'ok'
             
         # check validity of aurora's kw data for meter 
         if (meter_data['mean'] == 0).all():
@@ -189,7 +189,7 @@ def get_comparison_info(merged_df, meters, corr_threshold, pct_threshold):
             info_df.loc[meter, 'auroras'] = 'ok'
         
         # check if both are 'ok', then calculate
-        if info_df.loc[meter, 'brians'] == 'ok' and info_df.loc[meter, 'auroras'] == 'ok':
+        if info_df.loc[meter, 'harvests'] == 'ok' and info_df.loc[meter, 'auroras'] == 'ok':
             # get non-na values for comparison (keeps rows ONLY if BOTH columsn have non-na values)
             valid_data = meter_data.dropna(subset=['mean_kw', 'mean']).copy()
 
