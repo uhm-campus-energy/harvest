@@ -2,7 +2,7 @@ import pandas as pd
 from datetime import datetime
 
 # note: pass start and end or make equal to itself in passing
-def make_filename(df, name, var, ext="csv"):
+def make_filename(df, name, var, ext):
     """
     Create a filename with the format: name_var_YYMMDD-YYMMDD.ext, where the first date is the
     minimum datetime in the dataframe and the second date is the maximum datetime in the
