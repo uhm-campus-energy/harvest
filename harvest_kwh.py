@@ -137,7 +137,12 @@ def process_kwh(data_path):
 
     # convert datatetime column to a datetime type
     df['datetime'] = pd.to_datetime(df['datetime'], format='%Y-%m-%d %H:%M:%S')
-        
+    
+    df['is_exact'] = False
+    df['interpolated'] = False
+    
+    all_rows = []
+         
     # create column that contains the closest interval for each timestamp (contains ymd hms, using timedelta)
     df['interval_15min'] = df['datetime'].dt.round('15min')
 
