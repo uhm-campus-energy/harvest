@@ -142,6 +142,27 @@ def process_kwh(data_path):
     df['interpolated'] = False
     
     all_rows = []
+
+    for meter_name, meter_group in df.groupby('meter_name'):
+        meter_group = meter_group.sort_values('datetime').reset_index(drop=True)
+        
+        # create target intervals
+        start = meter_group['datetime'].min().floor('15min')
+        end = meter_group['datetime'].max().ceil('15min')
+        # create list of every exact 15min timestamp that SHOULD exist for that meter
+        target_intervals = pd.date_range(start=start, end=end, freq='15min')
+        
+        # for each target interval check if a real reading exists
+        for interval in target_intervals:
+            exact_match = meter_group[meter_group['datetime'] == interval]
+            
+            if not exact_match.empty:
+                row = exact_match.iloc[0].copy()
+                row['is_exact'] = True
+                row['interpolated'] = False
+                all_rows.append(row)
+            else:
+                
          
     # create column that contains the closest interval for each timestamp (contains ymd hms, using timedelta)
     df['interval_15min'] = df['datetime'].dt.round('15min')
