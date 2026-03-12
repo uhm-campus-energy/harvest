@@ -1,0 +1,89 @@
+meter_name,header1,header2,meter_model
+ag_engineering_main,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+ag_engineering_mcc,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+ag_science_mcc,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+biomedical_science_ch_1,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+biomedical_science_ch_2,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+biomedical_science_main_a,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+biomedical_science_main_b,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+biomedical_science_mcc_a,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+gilmore_hall_main_a,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+gilmore_hall_main_b,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+gilmore_hall_mcc,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+hig_noaa,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+hig_panel_pba,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+hig_panel_pb,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+hig_substation_3_main,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+marine_science_main_a,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+marine_science_main_b,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+miller_hall_main,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+physical_science_main,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+post_chiller_plant_main,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+post_main_1,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+post_main_2,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+sakamaki_hall_ac_eqpt,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+sakamaki_hall_main,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+saunders_hall_main_b,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+sherman_main_1,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+sherman_main_2,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+stan_sheriff_ctr_main_1,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+stan_sheriff_ctr_main_2,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+st_john_plant_science_main,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+webster_hall_main,3 Phase Positive Real Energy Used,3 phase real power,PQM2
+admin_serv_1,Total Watt Hour,3 phase watt total,EPM7000
+admin_serv_2_main,Total Watt Hour,3 phase watt total,EPM7000
+ag_science_main_1,Total Watt Hour,3 phase watt total,EPM7000
+ag_science_main_2,Total Watt Hour,3 phase watt total,EPM7000
+andrews_amp_main,Total Watt Hour,3 phase watt total,EPM7000
+archtecture_main,Total Watt Hour,3 phase watt total,EPM7000
+bachman hall annex,Total Watt Hour,3 phase watt total,EPM7000
+bachman_hall_main,Total Watt Hour,3 phase watt total,EPM7000
+building_037_main,Total Watt Hour,3 phase watt total,EPM7000
+building_1171a_to_f_main,Total Watt Hour,3 phase watt total,EPM7000
+building_1171f_cds,Total Watt Hour,3 phase watt total,EPM7000
+bus_ad_shidler_main,Total Watt Hour,3 phase watt total,EPM7000
+cancer_ctr_frzr_facil_main,Total Watt Hour,3 phase watt total,EPM7000
+cloning_lab_dp_n,Total Watt Hour,3 phase watt total,EPM7000
+cmore_hale_main,Total Watt Hour,3 phase watt total,EPM7000
+crawford_hall_main,Total Watt Hour,3 phase watt total,EPM7000
+dance_bldg_main,Total Watt Hour,3 phase watt total,EPM7000
+dkac_pool_main,Total Watt Hour,3 phase watt total,EPM7000
+edmondson_hall_main,Total Watt Hour,3 phase watt total,EPM7000
+env_protection_main,Total Watt Hour,3 phase watt total,EPM7000
+frear_hall_main,Total Watt Hour,3 phase watt total,EPM7000
+gartley_hall_main,Total Watt Hour,3 phase watt total,EPM7000
+gateway_house_main_a,Total Watt Hour,3 phase watt total,EPM7000
+gateway_house_main_b,Total Watt Hour,3 phase watt total,EPM7000
+george_hall_main,Total Watt Hour,3 phase watt total,EPM7000
+hale_aloha_ilima_tower_cafe,Total Watt Hour,3 phase watt total,EPM7000
+hale_aloha_ilima_tower_main,Total Watt Hour,3 phase watt total,EPM7000
+hamilton_lib_1_2_main_1,Total Watt Hour,3 phase watt total,EPM7000
+hamilton_lib_1_2_main_2,Total Watt Hour,3 phase watt total,EPM7000
+hawaii_hall_main,Total Watt Hour,3 phase watt total,EPM7000
+hper_klum_gym,Total Watt Hour,3 phase watt total,EPM7000
+hper_main,Total Watt Hour,3 phase watt total,EPM7000
+johnson_hall_a_main,Total Watt Hour,3 phase watt total,EPM7000
+keller_hall_main,Total Watt Hour,3 phase watt total,EPM7000
+krauss_hall_main,Total Watt Hour,3 phase watt total,EPM7000
+kuykendall_hall_main,Total Watt Hour,3 phase watt total,EPM7000
+law_lib_main,Total Watt Hour,3 phase watt total,EPM7000
+law_school_main,Total Watt Hour,3 phase watt total,EPM7000
+les_murakami_stadium_main,Total Watt Hour,3 phase watt total,EPM7000
+maintenance_shop_main,Total Watt Hour,3 phase watt total,EPM7000
+malama_1_2_ehso_main,Total Watt Hour,3 phase watt total,EPM7000
+malama_3_4_dive_safety_main,Total Watt Hour,3 phase watt total,EPM7000
+moore_hall_main,Total Watt Hour,3 phase watt total,EPM7000
+multipurpose_bldg_main,Total Watt Hour,3 phase watt total,EPM7000
+music_complex_main,Total Watt Hour,3 phase watt total,EPM7000
+pamoa_buildings_main,Total Watt Hour,3 phase watt total,EPM7000
+parking_struct_ph_i_main,Total Watt Hour,3 phase watt total,EPM7000
+pbrc_main_a,Total Watt Hour,3 phase watt total,EPM7000
+pbrc_main_b,Total Watt Hour,3 phase watt total,EPM7000
+physical_plant_bldg_main,Total Watt Hour,3 phase watt total,EPM7000
+physical_science_keller_comp,Total Watt Hour,3 phase watt total,EPM7000
+qlcss_main,Total Watt Hour,3 phase watt total,EPM7000
+spalding_hall_main,Total Watt Hour,3 phase watt total,EPM7000
+student_health_main,Total Watt Hour,3 phase watt total,EPM7000
+transportation_srvc_main,Total Watt Hour,3 phase watt total,EPM7000
+univ_high_school_3_main,Total Watt Hour,3 phase watt total,EPM7000
+wist_annex_1_main,Total Watt Hour,3 phase watt total,EPM7000

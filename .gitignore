@@ -1,14 +1,14 @@
-.ipynb_checkpoints/
+# ignore files generated in/by notebooks
+*.csv
+*.pdf
 
-# ignore CSVs generated in notebooks
-notebooks/*.csv
+.ipynb_checkpoints/
+*.pyc
+
+# dont ignore extracts
+!/extracts/
+!/extracts/*.csv
 
 # ignore macOS system files
 .DS_Store
 notebooks/.DS_Store
-
-md.py
-notebooks/testmeter_data.ipynb
-*.csv
-*.pyc
-*.pdf
