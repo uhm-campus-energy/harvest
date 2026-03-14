@@ -1,4 +1,4 @@
-name: meter_data
+name: harvest
 channels:
   - defaults
 dependencies:
