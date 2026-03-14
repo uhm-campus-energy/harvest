@@ -17,7 +17,7 @@
   * [harvest_kw.py](harvest_kw.py)
   * [file_naming.py](file_naming.py)
   * [find_missing_data.py](find_missing_data.py) (extra)
-`<br></br>`
+
 
 ### **Environment:**
 
@@ -28,4 +28,4 @@ $ conda env create -f environment.yml
 $ conda activate harvest
 ```
 
-`<br></br>`
+
