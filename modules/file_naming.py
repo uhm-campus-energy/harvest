@@ -1,5 +1,4 @@
 import pandas as pd
-from datetime import datetime
 
 # note: pass start and end or make equal to itself in passing
 def make_filename(df, name, var, ext):
@@ -18,8 +17,8 @@ def make_filename(df, name, var, ext):
 
     # ensure datetime column is in datetime format
     df['datetime'] = pd.to_datetime(df['datetime'])
-    
-    min = df['datetime'].min().strftime('%y%m%d')
-    max = df['datetime'].max().strftime('%y%m%d')
-    
-    return f'{name}_{var}_{min}-{max}.{ext}'
+
+    min_date = df['datetime'].min().strftime('%y%m%d')
+    max_date = df['datetime'].max().strftime('%y%m%d')
+
+    return f'{name}_{var}_{min_date}-{max_date}.{ext}'
