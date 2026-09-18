@@ -19,7 +19,7 @@ Optional: harvest_aurora_kwh.ipynb   (kWh steps on Aurora-format files)
 Helpers in other/  — not part of the main pipeline
 ```
 
-Steps 2a and 2b are independent of each other. Both require the CSV from step 1.
+Steps 2a and 2b are independent of each other, but both require the CSV from step 1.
 
 
 | Notebook                                                                 | Purpose                                     | Input                                                         | Output                                                                        |
@@ -41,14 +41,6 @@ Each notebook has an **Enter input** cell. Set paths and flags there; processing
 - `data_path`**.** Orig expects a directory of raw CSVs, not a single file.
 - `info_path`**.** kW requires the meter-model guide; without it, EPM7000 conversion can be off by a factor of 1,000.
 - Flags such as `time_frame`, `dedup_check`, and `create_merged_csv`.
-
-
-
-## Diagnosis
-
-1. Confirm harvest_orig ran first and the filename stamp matches.
-2. Open the corresponding section in [modules/README.md](../modules/README.md) (notebook markdown names the function).
-3. Inspect one meter in the output CSV before re-running the full set.
 
 
 

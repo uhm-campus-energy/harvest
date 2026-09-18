@@ -1,24 +1,8 @@
 # Harvest modules
 
-This directory contains the Python functions invoked by the notebooks in `notebooks/`. Each section documents one module: purpose, parameters, return values, and notes relevant to diagnosis.
+Each section names a Python file, then walks through **every function** in that file: what it is for, what you give it, what you get back, and what to check if the result looks wrong.
 
-## Overview
-
-Meter exports provide two quantities:
-
-- **kW** — instantaneous (or short-interval) real power. Processing averages `3_phase_watt_total` onto a 15-minute grid.
-- **kWh** — cumulative energy (`kwh` / `meter_reading`). Processing removes short-lived spikes, then interpolates onto exact 15-minute timestamps.
-
-Raw timestamps are not guaranteed to fall on the quarter hour. Both paths standardize to a 15-minute schedule so meters can be compared.
-
-**Pipeline**
-
-1. `harvest_orig.py` — ingest raw CSVs (one subdirectory per meter) into a combined table.
-2. Either:
-  - `harvest_kw.py` — 15-minute mean kW. Optional: `find_missing_data.py` (completeness) or `harvest_kw_comp.py` (Harvest vs Aurora).
-  - `harvest_kwh.py` — spike removal and 15-minute kWh interpolation.
-3. `file_naming.py` — output filenames of the form `name_var_YYMMDD-YYMMDD.ext`.
-
+---
 **Conventions**
 
 - Meter identifiers must match exactly, including case. `harvest_orig` lowercases names derived from folder names; `harvest_kw.load_data` replaces spaces with `_` in the info file but does not lowercase. A mismatch prevents the EPM7000 watt-to-kW conversion and produces values off by a factor of approximately 1,000.
@@ -26,7 +10,6 @@ Raw timestamps are not guaranteed to fall on the quarter hour. Both paths standa
 - Required ingest columns after renaming: `datetime`, `kwh`, `3_phase_watt_total`. `total_watt_hour` and `3_phase_positive_real_energy_used` are treated as kWh; `3_phase_real_power` is treated as power. Unrecognized vendor headers are skipped until a rename is added.
 
 ---
-
 
 
 ## 1. `harvest_orig.py`
@@ -76,7 +59,6 @@ Ingests a directory whose subdirectories are meters, each containing one or more
 ---
 
 
-
 ## 2. `harvest_kw.py`
 
 Computes 15-minute average kW from the combined meter table. Requires a meter-info CSV with at least `meter_name` and `meter_model`.
@@ -106,7 +88,6 @@ Computes 15-minute average kW from the combined meter table. Requires a meter-in
 **Returns.** DataFrame with `datetime`, `meter_name`, `mean_kw`. One row per meter per interval that contained at least one raw reading. Missing intervals are not inserted.
 
 ---
-
 
 
 ## 3. `harvest_kwh.py`
@@ -194,7 +175,6 @@ Gaps larger than 15 minutes on either side are not interpolated. Drops `3_phase_
 ---
 
 
-
 ## 4. `harvest_kw_comp.py`
 
 Aligns Harvest 15-minute kW with Aurora (or Blue Pillar) kW, produces per-meter plots, and summarizes agreement.
@@ -235,7 +215,6 @@ Match column:
 ---
 
 
-
 ## 5. `find_missing_data.py`
 
 Estimates monthly completeness of a processed kW file (`mean_kw`). A complete day of 15-minute data comprises 96 intervals.
@@ -259,10 +238,7 @@ Estimates monthly completeness of a processed kW file (`mean_kw`). A complete da
 ---
 
 
-
 ## 6. `file_naming.py`
-
-
 
 ### `make_filename(df, name, var, ext)`
 
@@ -273,20 +249,3 @@ Estimates monthly completeness of a processed kW file (`mean_kw`). A complete da
 **Returns.** Filename string.
 
 ---
-
-
-
-## Diagnostic map for potential issues
-
-
-| Observation                                       | Module                                                              |
-| ------------------------------------------------- | ------------------------------------------------------------------- |
-| Missing meters, unexpected columns, skipped files | `harvest_orig.py` (`load_meter_dfs` prints skip reasons)            |
-| kW off by a factor of ~1,000                      | `harvest_kw.py` (`process_kw_data`) and meter-info names/models     |
-| kWh spikes or missing 15-minute points            | `harvest_kwh.py` (cleaning vs interpolation)                        |
-| Harvest and Aurora series do not align            | `harvest_kw_comp.py` (identifiers and timestamps before thresholds) |
-| Implausible completeness percentages              | `find_missing_data.py` (file type or interval length)               |
-| Incorrect output filename dates                   | `file_naming.py`                                                    |
-
-
-Most processing is per meter. Isolating a single meter through the relevant function is sufficient to locate most errors. Intended call order and output paths are defined in `notebooks/`.
