@@ -49,9 +49,9 @@ Each notebook has an **Enter input** cell. Set paths and flags there; processing
 Ad hoc checks, not part of the main pipeline:
 
 
-| Notebook                                                                     | Purpose                                                                                   |
-| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| [other/find_time_skips.ipynb](other/find_time_skips.ipynb)                   | kWh: meters missing 15-minute slots. kW: monthly completeness via `find_missing_kw_data`. |
-| [other/swapping_gilmore_hall_kw.ipynb](other/swapping_gilmore_hall_kw.ipynb) | Plot Harvest vs Aurora Gilmore Hall A/B crossed (A vs B) to check swapped labels.         |
+| Notebook                                                                     | Purpose                                                                           |
+| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| [other/find_time_skips.ipynb](other/find_time_skips.ipynb)                   | Check processed kWh and kW series for missing 15-minute timestamps.               |
+| [other/swapping_gilmore_hall_kw.ipynb](other/swapping_gilmore_hall_kw.ipynb) | Plot Harvest vs Aurora Gilmore Hall A/B crossed (A vs B) to check swapped labels. |
 
 
