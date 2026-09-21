@@ -1,3 +1,5 @@
+.venv/
+
 # ignore files generated in/by notebooks
 *.csv
 *.pdf
@@ -5,9 +7,12 @@
 .ipynb_checkpoints/
 *.pyc
 
-# ignore extra files
+# ignore extra files in notebooks, but keep notebooks and this folder's guide
 notebooks/*
 !notebooks/*.ipynb
+!notebooks/README.md
+!notebooks/other/
+!notebooks/other/*.ipynb
 
 # dont ignore extracts
 !/extracts/
