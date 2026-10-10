@@ -24,7 +24,7 @@ def load_data(data_path, info_path):
     df = df.sort_values(by=['meter_name', 'datetime'])
 
     # remove extra columns
-    info_df.drop(columns={'header1', 'header2'}, axis=1, inplace=True)
+    info_df.drop(columns=['header1', 'header2'], inplace=True)
 
     # ensure all meter names are uniform
     info_df['meter_name'] = info_df['meter_name'].str.replace(' ', '_')
