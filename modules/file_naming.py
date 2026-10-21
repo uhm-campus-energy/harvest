@@ -8,7 +8,9 @@ def make_filename(df, name, var, ext):
 
     Parameters:
         df (dataframe): The dataframe containing the datetime column.
-        base_name (str): The base name for the file (e.g. "meter_data_kw").
+        name (str): The base name for the file (e.g. "meter_data").
+        var (str): The variable name to include in the filename (e.g. "kw").
+        ext (str): The file extension (e.g. "csv").
 
     Returns:
         str: The generated filename.
